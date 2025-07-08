@@ -44,17 +44,22 @@ const touSchedule = {
     }
 };
 
-// DOM Elements
-const currentPeriodEl = document.getElementById('periodName');
-const periodTimeEl = document.getElementById('periodTime');
-const currentTimeEl = document.getElementById('currentTime');
-const nextChangeEl = document.getElementById('nextChange');
-const scheduleGridEl = document.getElementById('scheduleGrid');
+// DOM Elements - will be initialized after DOM is loaded
+let currentPeriodEl, periodTimeEl, currentTimeEl, nextChangeEl, scheduleGridEl;
 
 // Utility functions
 function timeToMinutes(time) {
-    const [hours, minutes] = time.split(':').map(Number);
-    return hours * 60 + minutes;
+    try {
+        const [hours, minutes] = time.split(':').map(Number);
+        if (isNaN(hours) || isNaN(minutes)) {
+            console.warn('Invalid time format:', time);
+            return 0;
+        }
+        return hours * 60 + minutes;
+    } catch (error) {
+        console.error('Error converting time to minutes:', error);
+        return 0;
+    }
 }
 
 function minutesToTime(minutes) {
@@ -64,10 +69,19 @@ function minutesToTime(minutes) {
 }
 
 function formatTime12Hour(time24) {
-    const [hours, minutes] = time24.split(':').map(Number);
-    const period = hours >= 12 ? 'PM' : 'AM';
-    const hours12 = hours === 0 ? 12 : hours > 12 ? hours - 12 : hours;
-    return `${hours12}:${minutes.toString().padStart(2, '0')} ${period}`;
+    try {
+        const [hours, minutes] = time24.split(':').map(Number);
+        if (isNaN(hours) || isNaN(minutes)) {
+            console.warn('Invalid time format:', time24);
+            return '--:--';
+        }
+        const period = hours >= 12 ? 'PM' : 'AM';
+        const hours12 = hours === 0 ? 12 : hours > 12 ? hours - 12 : hours;
+        return `${hours12}:${minutes.toString().padStart(2, '0')} ${period}`;
+    } catch (error) {
+        console.error('Error formatting time:', error);
+        return '--:--';
+    }
 }
 
 function getCurrentSeason() {
@@ -151,6 +165,12 @@ function getNextChange() {
 }
 
 function updateDisplay() {
+    // Check if DOM elements are available
+    if (!currentPeriodEl || !periodTimeEl || !currentTimeEl || !nextChangeEl) {
+        console.warn('DOM elements not yet available');
+        return;
+    }
+
     const now = new Date();
     const currentTime = now.toTimeString().slice(0, 5);
     const currentPeriod = getCurrentPeriod();
@@ -190,6 +210,7 @@ function updateDisplay() {
 
 function updateStatusCardStyle(currentPeriod) {
     const statusCard = document.querySelector('.status-card');
+    if (!statusCard) return;
 
     // Remove all period classes
     statusCard.classList.remove('peak', 'on-peak', 'off-peak', 'super-off-peak');
@@ -201,6 +222,8 @@ function updateStatusCardStyle(currentPeriod) {
 
 function updateScheduleHighlight(currentPeriod) {
     const scheduleItems = document.querySelectorAll('.schedule-item');
+    if (!scheduleItems.length) return;
+
     scheduleItems.forEach(item => {
         item.classList.remove('current');
 
@@ -217,6 +240,8 @@ function updateScheduleHighlight(currentPeriod) {
 function updateTimeBoxStyling(currentPeriod, nextChange) {
     const currentTimeBox = document.querySelector('.current-time');
     const nextChangeBox = document.querySelector('.next-change');
+
+    if (!currentTimeBox || !nextChangeBox) return;
 
     // Reset all period classes
     currentTimeBox.classList.remove('peak', 'on-peak', 'off-peak', 'super-off-peak');
@@ -239,6 +264,8 @@ function updateTimeBoxStyling(currentPeriod, nextChange) {
 function resetTimeBoxStyling() {
     const currentTimeBox = document.querySelector('.current-time');
     const nextChangeBox = document.querySelector('.next-change');
+
+    if (!currentTimeBox || !nextChangeBox) return;
 
     // Remove all period classes
     currentTimeBox.classList.remove('peak', 'on-peak', 'off-peak', 'super-off-peak');
@@ -274,6 +301,8 @@ function getPeriodForTime(time) {
 }
 
 function createScheduleDisplay() {
+    if (!scheduleGridEl) return;
+
     const now = new Date();
     const isWeekend = now.getDay() === 0 || now.getDay() === 6;
     const season = getCurrentSeason();
@@ -320,6 +349,19 @@ function createScheduleDisplay() {
 
 // Initialize the app
 function init() {
+    // Initialize DOM elements
+    currentPeriodEl = document.getElementById('periodName');
+    periodTimeEl = document.getElementById('periodTime');
+    currentTimeEl = document.getElementById('currentTime');
+    nextChangeEl = document.getElementById('nextChange');
+    scheduleGridEl = document.getElementById('scheduleGrid');
+
+    // Check if all required elements are found
+    if (!currentPeriodEl || !periodTimeEl || !currentTimeEl || !nextChangeEl || !scheduleGridEl) {
+        console.error('Required DOM elements not found');
+        return;
+    }
+
     updateDisplay();
     createScheduleDisplay();
 
@@ -342,4 +384,12 @@ function init() {
 }
 
 // Start the application
-document.addEventListener('DOMContentLoaded', init); 
+document.addEventListener('DOMContentLoaded', init);
+
+// Fallback initialization in case DOMContentLoaded doesn't fire
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    // DOM is already loaded
+    init();
+} 
