@@ -2,6 +2,8 @@
 
 A real-time web application that shows your current SDGE Time of Use period and rate information.
 
+🌐 **Live Demo**: [https://campasachamp.github.io/sdge-rate-checker/](https://campasachamp.github.io/sdge-rate-checker/)
+
 ## Features
 
 - **Real-time Updates**: Shows your current TOU period with live updates every second
