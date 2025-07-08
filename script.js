@@ -2,44 +2,44 @@
 const touSchedule = {
     summer: {
         weekdays: [
-            { start: '16:00', end: '21:00', period: 'On-Peak', rate: 'Highest' },
-            { start: '06:00', end: '16:00', period: 'Off-Peak', rate: 'Medium' },
-            { start: '21:00', end: '00:00', period: 'Off-Peak', rate: 'Medium' },
-            { start: '00:00', end: '06:00', period: 'Super Off-Peak', rate: 'Lowest' }
+            { start: '16:00', end: '21:00', period: 'On-Peak' },
+            { start: '06:00', end: '16:00', period: 'Off-Peak' },
+            { start: '21:00', end: '00:00', period: 'Off-Peak' },
+            { start: '00:00', end: '06:00', period: 'Super Off-Peak' }
         ],
         weekends: [
-            { start: '16:00', end: '21:00', period: 'On-Peak', rate: 'Highest' },
-            { start: '14:00', end: '16:00', period: 'Off-Peak', rate: 'Medium' },
-            { start: '21:00', end: '00:00', period: 'Off-Peak', rate: 'Medium' },
-            { start: '00:00', end: '14:00', period: 'Super Off-Peak', rate: 'Lowest' }
+            { start: '16:00', end: '21:00', period: 'On-Peak' },
+            { start: '14:00', end: '16:00', period: 'Off-Peak' },
+            { start: '21:00', end: '00:00', period: 'Off-Peak' },
+            { start: '00:00', end: '14:00', period: 'Super Off-Peak' }
         ]
     },
     winter: {
         weekdays: [
-            { start: '16:00', end: '21:00', period: 'On-Peak', rate: 'Highest' },
-            { start: '06:00', end: '16:00', period: 'Off-Peak', rate: 'Medium' },
-            { start: '21:00', end: '00:00', period: 'Off-Peak', rate: 'Medium' },
-            { start: '00:00', end: '06:00', period: 'Super Off-Peak', rate: 'Lowest' }
+            { start: '16:00', end: '21:00', period: 'On-Peak' },
+            { start: '06:00', end: '16:00', period: 'Off-Peak' },
+            { start: '21:00', end: '00:00', period: 'Off-Peak' },
+            { start: '00:00', end: '06:00', period: 'Super Off-Peak' }
         ],
         weekends: [
-            { start: '16:00', end: '21:00', period: 'On-Peak', rate: 'Highest' },
-            { start: '14:00', end: '16:00', period: 'Off-Peak', rate: 'Medium' },
-            { start: '21:00', end: '00:00', period: 'Off-Peak', rate: 'Medium' },
-            { start: '00:00', end: '14:00', period: 'Super Off-Peak', rate: 'Lowest' }
+            { start: '16:00', end: '21:00', period: 'On-Peak' },
+            { start: '14:00', end: '16:00', period: 'Off-Peak' },
+            { start: '21:00', end: '00:00', period: 'Off-Peak' },
+            { start: '00:00', end: '14:00', period: 'Super Off-Peak' }
         ]
     },
     winterMarchApril: {
         weekdays: [
-            { start: '16:00', end: '21:00', period: 'On-Peak', rate: 'Highest' },
-            { start: '06:00', end: '16:00', period: 'Off-Peak', rate: 'Medium' },
-            { start: '21:00', end: '00:00', period: 'Off-Peak', rate: 'Medium' },
-            { start: '00:00', end: '06:00', period: 'Super Off-Peak', rate: 'Lowest' }
+            { start: '16:00', end: '21:00', period: 'On-Peak' },
+            { start: '06:00', end: '16:00', period: 'Off-Peak' },
+            { start: '21:00', end: '00:00', period: 'Off-Peak' },
+            { start: '00:00', end: '06:00', period: 'Super Off-Peak' }
         ],
         weekends: [
-            { start: '16:00', end: '21:00', period: 'On-Peak', rate: 'Highest' },
-            { start: '14:00', end: '16:00', period: 'Off-Peak', rate: 'Medium' },
-            { start: '21:00', end: '00:00', period: 'Off-Peak', rate: 'Medium' },
-            { start: '00:00', end: '14:00', period: 'Super Off-Peak', rate: 'Lowest' }
+            { start: '16:00', end: '21:00', period: 'On-Peak' },
+            { start: '14:00', end: '16:00', period: 'Off-Peak' },
+            { start: '21:00', end: '00:00', period: 'Off-Peak' },
+            { start: '00:00', end: '14:00', period: 'Super Off-Peak' }
         ]
     }
 };
