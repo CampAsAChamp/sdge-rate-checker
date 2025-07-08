@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDGE TOU Period Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>SDGE Time of Use Tracker</h1>
+            <p class="subtitle">Real-time TOU period monitoring</p>
+        </header>
+
+        <main>
+            <div class="current-status">
+                <div class="status-card">
+                    <h2>Current Period</h2>
+                    <div class="period-display" id="currentPeriod">
+                        <span class="period-name" id="periodName">Loading...</span>
+                        <span class="period-time" id="periodTime">--:--</span>
+                    </div>
+                    <div class="rate-info" id="rateInfo">
+                        <span class="rate-label">Rate:</span>
+                        <span class="rate-value" id="rateValue">--</span>
+                    </div>
+                </div>
+
+                <div class="time-info">
+                    <div class="current-time">
+                        <span class="time-label">Current Time:</span>
+                        <span class="time-value" id="currentTime">--:--</span>
+                    </div>
+                    <div class="next-change">
+                        <span class="change-label">Next Change:</span>
+                        <span class="change-value" id="nextChange">--:--</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="schedule-section">
+                <h3>Daily Schedule</h3>
+                <div class="schedule-grid" id="scheduleGrid">
+                    <!-- Schedule will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="legend">
+                <h3>Rate Legend</h3>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <span class="legend-color peak"></span>
+                        <span class="legend-label">Peak</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color off-peak"></span>
+                        <span class="legend-label">Off-Peak</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color super-off-peak"></span>
+                        <span class="legend-label">Super Off-Peak</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Data based on SDGE Time of Use rates</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
