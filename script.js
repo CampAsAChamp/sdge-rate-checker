@@ -175,10 +175,16 @@ function updateDisplay() {
 
         // Update schedule highlighting
         updateScheduleHighlight(currentPeriod);
+
+        // Update current time and next change box styling
+        updateTimeBoxStyling(currentPeriod, nextChange);
     } else {
         currentPeriodEl.textContent = 'Unknown';
         periodTimeEl.textContent = '--:--';
         nextChangeEl.textContent = '--:--';
+
+        // Reset time box styling
+        resetTimeBoxStyling();
     }
 }
 
@@ -206,6 +212,65 @@ function updateScheduleHighlight(currentPeriod) {
             item.classList.add('current');
         }
     });
+}
+
+function updateTimeBoxStyling(currentPeriod, nextChange) {
+    const currentTimeBox = document.querySelector('.current-time');
+    const nextChangeBox = document.querySelector('.next-change');
+
+    // Reset all period classes
+    currentTimeBox.classList.remove('peak', 'on-peak', 'off-peak', 'super-off-peak');
+    nextChangeBox.classList.remove('peak', 'on-peak', 'off-peak', 'super-off-peak');
+
+    // Apply current period class to current time box
+    const currentPeriodClass = currentPeriod.period.toLowerCase().replace(/\s+/g, '-');
+    currentTimeBox.classList.add(currentPeriodClass);
+
+    // Apply next period class to next change box
+    if (nextChange) {
+        const nextPeriod = getPeriodForTime(nextChange);
+        if (nextPeriod) {
+            const nextPeriodClass = nextPeriod.period.toLowerCase().replace(/\s+/g, '-');
+            nextChangeBox.classList.add(nextPeriodClass);
+        }
+    }
+}
+
+function resetTimeBoxStyling() {
+    const currentTimeBox = document.querySelector('.current-time');
+    const nextChangeBox = document.querySelector('.next-change');
+
+    // Remove all period classes
+    currentTimeBox.classList.remove('peak', 'on-peak', 'off-peak', 'super-off-peak');
+    nextChangeBox.classList.remove('peak', 'on-peak', 'off-peak', 'super-off-peak');
+}
+
+function getPeriodForTime(time) {
+    const now = new Date();
+    const isWeekend = now.getDay() === 0 || now.getDay() === 6;
+    const season = getCurrentSeason();
+    const schedule = isWeekend ? touSchedule[season].weekends : touSchedule[season].weekdays;
+
+    const timeMinutes = timeToMinutes(time);
+
+    for (const period of schedule) {
+        const startMinutes = timeToMinutes(period.start);
+        const endMinutes = timeToMinutes(period.end);
+
+        if (endMinutes < startMinutes) {
+            // Period spans midnight
+            if (timeMinutes >= startMinutes || timeMinutes < endMinutes) {
+                return period;
+            }
+        } else {
+            // Normal period
+            if (timeMinutes >= startMinutes && timeMinutes < endMinutes) {
+                return period;
+            }
+        }
+    }
+
+    return null;
 }
 
 function createScheduleDisplay() {

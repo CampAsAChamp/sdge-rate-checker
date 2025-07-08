@@ -98,6 +98,7 @@ main {
     padding: 20px;
     border-radius: 10px;
     border-left: 4px solid #667eea;
+    transition: border-left-color 0.3s ease;
 }
 
 .time-label,
@@ -258,6 +259,23 @@ main {
     color: #28a745;
 }
 
+/* Current time and next change period styling */
+.current-time.peak,
+.current-time.on-peak,
+.next-change.peak,
+.next-change.on-peak {
+    border-left-color: #dc3545;
+}
+
+.current-time.off-peak,
+.next-change.off-peak {
+    border-left-color: #ffc107;
+}
+
+.current-time.super-off-peak,
+.next-change.super-off-peak {
+    border-left-color: #28a745;
+}
 .legend {
     border-top: 1px solid #eee;
     padding-top: 30px;
