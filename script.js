@@ -47,7 +47,6 @@ const touSchedule = {
 // DOM Elements
 const currentPeriodEl = document.getElementById('periodName');
 const periodTimeEl = document.getElementById('periodTime');
-const rateValueEl = document.getElementById('rateValue');
 const currentTimeEl = document.getElementById('currentTime');
 const nextChangeEl = document.getElementById('nextChange');
 const scheduleGridEl = document.getElementById('scheduleGrid');
@@ -165,7 +164,6 @@ function updateDisplay() {
         // Update current period
         currentPeriodEl.textContent = currentPeriod.period;
         periodTimeEl.textContent = `${formatTime12Hour(currentPeriod.start)} - ${formatTime12Hour(currentPeriod.end)}`;
-        rateValueEl.textContent = currentPeriod.rate;
 
         // Update next change
         if (nextChange) {
@@ -180,7 +178,6 @@ function updateDisplay() {
     } else {
         currentPeriodEl.textContent = 'Unknown';
         periodTimeEl.textContent = '--:--';
-        rateValueEl.textContent = '--';
         nextChangeEl.textContent = '--:--';
     }
 }
