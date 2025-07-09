@@ -323,7 +323,9 @@ function createScheduleDisplay() {
         seasonText = 'Winter Schedule';
     }
 
-    seasonIndicator.textContent = seasonText;
+    // Add day type indicator
+    const dayType = isWeekend ? 'Weekend' : 'Weekday';
+    seasonIndicator.textContent = `${seasonText} - ${dayType}`;
     scheduleGridEl.appendChild(seasonIndicator);
 
     // Sort schedule by start time (chronological order)
